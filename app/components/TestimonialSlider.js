@@ -1,9 +1,15 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
+function truncate(text, maxLength = 140) {
+  if (!text) return '';
+  return text.length > maxLength ? text.slice(0, maxLength) + '... ' : text;
+}
+
 export default function TestimonialSlider({ testimonials }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [showModal, setShowModal] = useState(false);
   const timerRef = useRef();
   const count = Array.isArray(testimonials) ? testimonials.length : 0;
 
@@ -26,17 +32,24 @@ export default function TestimonialSlider({ testimonials }) {
 
   if (!Array.isArray(testimonials) || testimonials.length === 0) return null;
   const t = testimonials[index];
+  const maxLength = 140;
+  const isTruncated = t.quote && t.quote.length > maxLength;
 
   return (
     <div className="testimonial-slider">
       <div className="testimonial-slider-inner">
         <button className="slider-arrow left" onClick={prev} aria-label="Previous testimonial">{'<'}</button>
         <div className={`testimonial-slide slide-${direction === 1 ? 'right' : 'left'}`} key={index}>
-          <div className="testimonial-card-modern">
+          <div className="testimonial-card-modern" style={{ minHeight: 180, maxHeight: 220, width: 480, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, justifyContent: 'center' }}>
               <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
-              <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left' }}>
-                {t.quote}
+              <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left', flex: 1 }}>
+                {isTruncated ? (
+                  <>
+                    {truncate(t.quote, maxLength)}
+                    <button className="view-more-btn" onClick={() => setShowModal(true)} style={{ color: '#2563eb', background: 'none', border: 'none', fontWeight: 600, cursor: 'pointer', fontSize: '1rem', padding: 0 }}>View more</button>
+                  </>
+                ) : t.quote}
               </blockquote>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 18, justifyContent: 'center' }}>
@@ -60,6 +73,21 @@ export default function TestimonialSlider({ testimonials }) {
           />
         ))}
       </div>
+      {showModal && (
+        <div className="testimonial-modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="testimonial-modal" onClick={e => e.stopPropagation()}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
+              {t.photo && <img src={t.photo} alt={t.name} style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover' }} />}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
+                <div style={{ fontWeight: 700, color: '#2563eb', fontSize: 20 }}>{t.name}</div>
+                {t.position && <div style={{ color: '#6b7280', fontSize: 16, marginTop: 0 }}>{t.position}</div>}
+              </div>
+            </div>
+            <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left' }}>{t.quote}</blockquote>
+            <button onClick={() => setShowModal(false)} style={{ marginTop: 24, background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.5rem', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Close</button>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .testimonial-slider {
           width: 100%;
@@ -106,13 +134,17 @@ export default function TestimonialSlider({ testimonials }) {
           flex-direction: column;
           align-items: center;
           min-width: 280px;
+          min-height: 180px;
+          max-height: 220px;
+          width: 480px;
+          overflow: hidden;
+          justify-content: center;
         }
         .slider-arrow {
-          background:rgb(255, 255, 255);
-          border: none;
+          background: #fff;
+          border: 2px solid #2563eb;
           color: #2563eb;
           font-size: 2rem;
-          border: 2px solid #2563eb;
           border-radius: 50%;
           width: 40px;
           height: 40px;
@@ -120,7 +152,7 @@ export default function TestimonialSlider({ testimonials }) {
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: background 0.2s;
+          transition: background 0.2s, border-color 0.2s;
         }
         .slider-arrow:hover {
           background: #e0e7ef;
@@ -147,6 +179,36 @@ export default function TestimonialSlider({ testimonials }) {
         }
         .slider-dot.active {
           background: #2563eb;
+        }
+        .view-more-btn {
+          color: #2563eb;
+          background: none;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          font-size: 1rem;
+          padding: 0;
+        }
+        .testimonial-modal-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.25);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .testimonial-modal {
+          background: #fff;
+          border-radius: 16px;
+          box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+          padding: 2.5rem 2rem 2rem 2rem;
+          max-width: 420px;
+          width: 100%;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
       `}</style>
     </div>
