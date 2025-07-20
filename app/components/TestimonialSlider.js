@@ -3,23 +3,26 @@ import React, { useState, useEffect, useRef } from "react";
 
 export default function TestimonialSlider({ testimonials }) {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const timerRef = useRef();
   const count = Array.isArray(testimonials) ? testimonials.length : 0;
 
   useEffect(() => {
     if (count < 2) return;
     timerRef.current = setInterval(() => {
+      setDirection(1);
       setIndex((prev) => (prev + 1) % count);
     }, 5000);
     return () => clearInterval(timerRef.current);
   }, [count]);
 
-  const goTo = (i) => {
+  const goTo = (i, dir = 1) => {
+    setDirection(dir);
     setIndex(i);
     if (timerRef.current) clearInterval(timerRef.current);
   };
-  const prev = () => goTo((index - 1 + count) % count);
-  const next = () => goTo((index + 1) % count);
+  const prev = () => goTo((index - 1 + count) % count, -1);
+  const next = () => goTo((index + 1) % count, 1);
 
   if (!Array.isArray(testimonials) || testimonials.length === 0) return null;
   const t = testimonials[index];
@@ -27,27 +30,29 @@ export default function TestimonialSlider({ testimonials }) {
   return (
     <div className="testimonial-slider">
       <div className="testimonial-slider-inner">
-        <button className="slider-arrow left" onClick={prev} aria-label="Previous testimonial">&#8592;</button>
-        <div className="testimonial-slide">
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-            <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
-            <blockquote style={{ fontSize: '1.1rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7 }}>
-              {t.quote}
-            </blockquote>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
-            {t.photo && <img src={t.photo} alt={t.name} style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover' }} />}
-            <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 15 }}>{t.name}</div>
+        <button className="slider-arrow left" onClick={prev} aria-label="Previous testimonial">{'<'}</button>
+        <div className={`testimonial-slide slide-${direction === 1 ? 'right' : 'left'}`} key={index}>
+          <div className="testimonial-card-modern">
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, justifyContent: 'center' }}>
+              <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
+              <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left' }}>
+                {t.quote}
+              </blockquote>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 18, justifyContent: 'center' }}>
+              {t.photo && <img src={t.photo} alt={t.name} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', border: '2px solid #2563eb' }} />}
+              <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 16 }}>{t.name}</div>
+            </div>
           </div>
         </div>
-        <button className="slider-arrow right" onClick={next} aria-label="Next testimonial">&#8594;</button>
+        <button className="slider-arrow right" onClick={next} aria-label="Next testimonial">{'>'}</button>
       </div>
       <div className="slider-dots">
         {testimonials.map((_, i) => (
           <button
             key={i}
             className={`slider-dot${i === index ? " active" : ""}`}
-            onClick={() => goTo(i)}
+            onClick={() => goTo(i, i > index ? 1 : -1)}
             aria-label={`Go to testimonial ${i + 1}`}
           />
         ))}
@@ -72,6 +77,32 @@ export default function TestimonialSlider({ testimonials }) {
           flex: 1 1 0;
           max-width: 500px;
           margin: 0 1rem;
+          transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
+          opacity: 1;
+        }
+        .slide-right {
+          animation: slideInRight 0.5s;
+        }
+        .slide-left {
+          animation: slideInLeft 0.5s;
+        }
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(60px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInLeft {
+          from { opacity: 0; transform: translateX(-60px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .testimonial-card-modern {
+          background: #fff;
+          border-radius: 16px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          padding: 2rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 280px;
         }
         .slider-arrow {
           background: #f3f4f6;
