@@ -1,3 +1,3 @@
 ---
-logo: /images/uploads/logo_koderra_color.png
+logo: /images/uploads/toys-r-us-logo.png
 ---
