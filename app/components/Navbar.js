@@ -22,9 +22,15 @@ export default function Navbar({ logo, items }) {
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 {item.link ? (
-                  <Link href={item.link}>{item.label}</Link>
+                  <Link href={item.link} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {item.label}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2, color: '#2563eb' }}>^</span>}
+                  </Link>
                 ) : (
-                  <span>{item.label}</span>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    {item.label}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2, color: '#2563eb' }}>^</span>}
+                  </span>
                 )}
                 {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
                   <ul className={`navbar-dropdown${openDropdown === idx ? " open" : ""}`}>
@@ -89,8 +95,9 @@ export default function Navbar({ logo, items }) {
           border: 1px solid #e5e7eb;
           border-radius: 8px;
           min-width: 180px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
           z-index: 10;
+          padding: 0.5rem 0;
         }
         .navbar-dropdown.open {
           display: block;
@@ -100,6 +107,7 @@ export default function Navbar({ logo, items }) {
           padding: 0.75rem 1rem;
           color: #1a1a1a;
           text-decoration: none;
+          transition: background 0.2s;
         }
         .navbar-dropdown-item a:hover {
           background: #f3f4f6;

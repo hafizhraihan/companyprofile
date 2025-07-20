@@ -187,7 +187,7 @@ export default async function Home() {
         </div>
       </main>
       {/* WhatsApp CTA */}
-      <section style={{ background: '#2563eb', color: '#fff', padding: '2rem 0', textAlign: 'center', marginTop: 48 }}>
+      <section style={{ background: '#2563eb', color: '#fff', padding: '2rem 0', textAlign: 'center', marginTop: 0 }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
           <div style={{ fontSize: 24, fontWeight: 600 }}>Ready to talk to us?</div>
           <a href={`https://wa.me/${contact.phone ? contact.phone.replace(/\D/g, '') : ''}`} target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: '#2563eb', fontWeight: 700, fontSize: 18, borderRadius: 8, padding: '0.75rem 2rem', textDecoration: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'inline-block', marginTop: 8 }}>Chat on WhatsApp</a>
@@ -199,13 +199,18 @@ export default async function Home() {
           {/* Contact & Social (first section) */}
           <div style={{ flex: '1 1 180px', minWidth: 180 }}>
             <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 12 }}>Contact</div>
-            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 8 }}><strong>Address:</strong> {contact.address}</div>
-            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 8 }}><strong>Phone:</strong> {contact.phone}</div>
-            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 16 }}><strong>Email:</strong> {contact.email}</div>
+            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 8 }}>{contact.address}</div>
+            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 8 }}>{contact.phone}</div>
+            <div style={{ color: '#e5e7eb', fontSize: 15, marginBottom: 16 }}>{contact.email}</div>
             <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>Social</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none', fontSize: 15 }}>LinkedIn</a>
-              <a href="https://instagram.com/yourcompany" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none', fontSize: 15 }}>Instagram</a>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+              {footerSections.filter(s => s.title && s.title.toLowerCase().includes('social')).flatMap(section =>
+                Array.isArray(section.links) ? section.links.map((link, i) => (
+                  <a key={i} href={link.ref} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none', fontSize: 20, display: 'flex', alignItems: 'center' }}>
+                    {getSocialIcon(link.name)}
+                  </a>
+                )) : []
+              )}
             </div>
           </div>
           {/* Admin-editable footer sections */}
