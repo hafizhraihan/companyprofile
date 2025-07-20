@@ -2,6 +2,8 @@
 name: Bintang
 position: Developer at Koderra Dev
 quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
+  tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+  amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+  et dolore magna aliqua.
 photo: /images/uploads/whatsapp-image-2025-05-13-at-11.21.42_4d174014.jpg
 ---
