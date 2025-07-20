@@ -24,12 +24,12 @@ export default function Navbar({ logo, items }) {
                 {item.link ? (
                   <Link href={item.link} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {item.label}
-                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2, color: '#2563eb' }}>^</span>}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2 }}>&#709;</span>}
                   </Link>
                 ) : (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {item.label}
-                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2, color: '#2563eb' }}>^</span>}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2 }}>&#709;</span>}
                   </span>
                 )}
                 {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (

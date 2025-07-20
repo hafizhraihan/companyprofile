@@ -10,6 +10,7 @@ export default function TestimonialSlider({ testimonials }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const [showModal, setShowModal] = useState(false);
+  const [modalTestimonial, setModalTestimonial] = useState(null);
   const timerRef = useRef();
   const count = Array.isArray(testimonials) ? testimonials.length : 0;
 
@@ -47,7 +48,7 @@ export default function TestimonialSlider({ testimonials }) {
                 {isTruncated ? (
                   <>
                     {truncate(t.quote, maxLength)}
-                    <button className="view-more-btn" onClick={() => setShowModal(true)} style={{ color: '#2563eb', background: 'none', border: 'none', fontWeight: 600, cursor: 'pointer', fontSize: '1rem', padding: 0 }}>View more</button>
+                    <button className="view-more-btn" onClick={() => { setShowModal(true); setModalTestimonial(t); }} style={{ color: '#2563eb', background: 'none', border: 'none', fontWeight: 600, cursor: 'pointer', fontSize: '1rem', padding: 0 }}>View more</button>
                   </>
                 ) : t.quote}
               </blockquote>
@@ -73,18 +74,18 @@ export default function TestimonialSlider({ testimonials }) {
           />
         ))}
       </div>
-      {showModal && (
-        <div className="testimonial-modal-overlay" onClick={() => setShowModal(false)}>
+      {showModal && modalTestimonial && (
+        <div className="testimonial-modal-overlay" onClick={() => { setShowModal(false); setModalTestimonial(null); }}>
           <div className="testimonial-modal" onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-              {t.photo && <img src={t.photo} alt={t.name} style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover' }} />}
+              {modalTestimonial.photo && <img src={modalTestimonial.photo} alt={modalTestimonial.name} style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover' }} />}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
-                <div style={{ fontWeight: 700, color: '#2563eb', fontSize: 20 }}>{t.name}</div>
-                {t.position && <div style={{ color: '#6b7280', fontSize: 16, marginTop: 0 }}>{t.position}</div>}
+                <div style={{ fontWeight: 700, color: '#2563eb', fontSize: 20 }}>{modalTestimonial.name}</div>
+                {modalTestimonial.position && <div style={{ color: '#6b7280', fontSize: 16, marginTop: 0 }}>{modalTestimonial.position}</div>}
               </div>
             </div>
-            <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left' }}>{t.quote}</blockquote>
-            <button onClick={() => setShowModal(false)} style={{ marginTop: 24, background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.5rem', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Close</button>
+            <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left' }}>{modalTestimonial.quote}</blockquote>
+            <button onClick={() => { setShowModal(false); setModalTestimonial(null); }} style={{ marginTop: 24, background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.5rem', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>Close</button>
           </div>
         </div>
       )}
