@@ -1,4 +1,6 @@
 ---
+section_title: "Our Achievements"
+section_description: "Some of our key numbers."
 stats:
   - label: "Clients"
     value: "100+"

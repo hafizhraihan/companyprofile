@@ -6,6 +6,22 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "navbar"
+    label: "Navbar"
+    folder: "content/navbar"
+    create: true
+    slug: "{{fields.label}}"
+    fields:
+      - { label: "Label", name: "label", widget: "string" }
+      - { label: "Link", name: "link", widget: "string", required: false }
+      - label: "Dropdown Items"
+        name: "dropdown"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Link", name: "link", widget: "string" }
+
   - name: "hero"
     label: "Hero Section"
     files:
@@ -19,25 +35,27 @@ collections:
           - { label: "CTA Link", name: "cta_link", widget: "string" }
           - { label: "Image", name: "image", widget: "image" }
 
-  - name: "testimonials"
-    label: "Testimonials"
-    folder: "content/testimonials"
-    create: true
-    slug: "{{fields.name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Quote", name: "quote", widget: "text" }
-      - { label: "Photo", name: "photo", widget: "image" }
-
-  - name: "partners"
-    label: "Partners"
-    folder: "content/partners"
-    create: true
-    slug: "{{fields.name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Logo", name: "logo", widget: "image" }
-      - { label: "Website", name: "website", widget: "string" }
+  - name: "statistics"
+    label: "Data Statistics"
+    files:
+      - label: "Statistics"
+        name: "statistics"
+        file: "content/statistics.md"
+        fields:
+          - label: "Section Title"
+            name: "section_title"
+            widget: "string"
+            default: "Our Achievements"
+          - label: "Section Description"
+            name: "section_description"
+            widget: "string"
+            default: "Some of our key numbers."
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
 
   - name: "products"
     label: "Products/Services"
@@ -48,6 +66,55 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Image", name: "image", widget: "image" }
+
+  - name: "products_section"
+    label: "Products Section Settings"
+    files:
+      - label: "Products Section"
+        name: "products_section"
+        file: "content/products_section.md"
+        fields:
+          - { label: "Section Title", name: "section_title", widget: "string", default: "Our Products & Services" }
+          - { label: "Section Description", name: "section_description", widget: "string", default: "Discover our innovative solutions designed to help your business grow and succeed in today's competitive market." }
+
+  - name: "partners"
+    label: "Partners"
+    folder: "content/partners"
+    create: true
+    slug: "{{fields.name}}"
+    fields:
+      - { label: "Logo", name: "logo", widget: "image" }
+      - { label: "Website", name: "website", widget: "string", required: false }
+
+  - name: "partners_section"
+    label: "Partners Section Settings"
+    files:
+      - label: "Partners Section"
+        name: "partners_section"
+        file: "content/partners_section.md"
+        fields:
+          - { label: "Section Title", name: "section_title", widget: "string", default: "Trusted by Industry Leaders" }
+          - { label: "Section Description", name: "section_description", widget: "string", default: "We're proud to work with some of the most innovative companies in the industry." }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{fields.name}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Quote", name: "quote", widget: "text" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+
+  - name: "testimonials_section"
+    label: "Testimonials Section Settings"
+    files:
+      - label: "Testimonials Section"
+        name: "testimonials_section"
+        file: "content/testimonials_section.md"
+        fields:
+          - { label: "Section Title", name: "section_title", widget: "string", default: "What Our Clients Say" }
+          - { label: "Section Description", name: "section_description", widget: "string", default: "Hear from the people who trust us to deliver exceptional results for their businesses." }
 
   - name: "contact"
     label: "Contact"
@@ -61,17 +128,12 @@ collections:
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Map Embed", name: "map_embed", widget: "text", required: false }
 
-  - name: "statistics"
-    label: "Data Statistics"
+  - name: "contact_section"
+    label: "Contact Section Settings"
     files:
-      - label: "Statistics"
-        name: "statistics"
-        file: "content/statistics.md"
+      - label: "Contact Section"
+        name: "contact_section"
+        file: "content/contact_section.md"
         fields:
-          - label: "Stats"
-            name: "stats"
-            widget: "list"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Value", name: "value", widget: "string" }
-              - { label: "Icon", name: "icon", widget: "image", required: false } 
+          - { label: "Section Title", name: "section_title", widget: "string", default: "Get in Touch" }
+          - { label: "Section Description", name: "section_description", widget: "string", default: "Ready to start your next project? Let's discuss how we can help you achieve your goals." } 
