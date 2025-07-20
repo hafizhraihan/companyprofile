@@ -39,12 +39,12 @@ export default function TestimonialSlider({ testimonials }) {
                 {t.quote}
               </blockquote>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 18, justifyContent: 'center', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                {t.photo && <img src={t.photo} alt={t.name} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', border: '2px solid #2563eb' }} />}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 18, justifyContent: 'center' }}>
+              {t.photo && <img src={t.photo} alt={t.name} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
                 <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 16 }}>{t.name}</div>
+                {t.position && <div style={{ color: '#6b7280', fontSize: 14, marginTop: 2 }}>{t.position}</div>}
               </div>
-              {t.position && <div style={{ color: '#6b7280', fontSize: 14, marginTop: 2 }}>{t.position}</div>}
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function TestimonialSlider({ testimonials }) {
           border: none;
           color: #2563eb;
           font-size: 2rem;
-          border: 5px solid #2563eb;
+          border: 2px solid #2563eb;
           border-radius: 50%;
           width: 40px;
           height: 40px;
