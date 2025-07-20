@@ -58,15 +58,15 @@ p {
   margin: 0 0 1rem 0;
   color: var(--muted);
 }
-/* 
+
 a {
-  color: var(--accent);
+  color: var(--foreground);
   text-decoration: none;
   transition: all 0.2s ease;
 }
-
+/* 
 a:hover {
-  color: var(--accent-hover);
+  
 } */
 
 img {

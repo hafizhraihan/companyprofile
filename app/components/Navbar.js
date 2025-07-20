@@ -102,23 +102,23 @@ export default function Navbar({ logo, items }) {
           transform: scale(1.08);
         }
         .navbar-dropdown {
+          list-style: none;
           display: block;
           opacity: 0;
           pointer-events: none;
-          transform: translateY(10px) scaleY(0.98);
-          transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+          transform: translateY(16px) scaleY(0.98);
+          transition: opacity 0.28s cubic-bezier(.4,0,.2,1), transform 0.28s cubic-bezier(.4,0,.2,1);
           position: absolute;
           left: 0;
           top: 100%;
-          background: #fff;
-          border: 1px solid #e5e7eb;
-          border-radius: 12px;
-          min-width: 200px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+          background: #f9fafb;
+          border: 1.5px solid #e5e7eb;
+          border-radius: 16px;
+          min-width: 220px;
+          box-shadow: 0 8px 32px 0 rgba(40,60,90,0.13), 0 1.5px 6px 0 rgba(40,60,90,0.07);
           z-index: 10;
-          padding: 0.5rem 0;
+          padding: 0.75rem 0.5rem;
           visibility: hidden;
-          list-style: none;
         }
         .navbar-dropdown.open {
           opacity: 1;
@@ -128,18 +128,24 @@ export default function Navbar({ logo, items }) {
         }
         .navbar-dropdown-item {
           list-style: none;
+          margin: 0.15rem 0;
+          border-radius: 8px;
         }
         .navbar-dropdown-item a {
           display: block;
-          padding: 0.75rem 1.25rem;
+          padding: 0.65rem 1.25rem;
           color: #1a1a1a !important;
           text-decoration: none;
-          border-radius: 6px;
-          transition: background 0.18s, color 0.18s;
+          border-radius: 8px;
+          font-size: 1.04rem;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+          transition: background 0.18s, color 0.18s, box-shadow 0.18s;
         }
         .navbar-dropdown-item a:hover {
-          background: #f3f4f6;
+          background: #e0e7ef;
           color: #2563eb !important;
+          box-shadow: 0 2px 8px 0 rgba(40,60,90,0.07);
         }
         .navbar-item.has-dropdown > a, .navbar-item.has-dropdown > span {
           padding-right: 1.5rem;
