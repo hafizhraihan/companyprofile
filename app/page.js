@@ -59,7 +59,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar logo={navbarLogo} items={Array.isArray(navbarItems) ? navbarItems : []} />
+      {/* <Navbar logo={navbarLogo} items={Array.isArray(navbarItems) ? navbarItems : []} /> */}
       <main>
         {/* Hero Section as background */}
         <section
