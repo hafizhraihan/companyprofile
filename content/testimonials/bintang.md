@@ -1,6 +1,6 @@
 ---
 name: Charles Pangestu
-position: Developer at Koderra Dev
+position: Co-Founder of XYZ Holdings
 quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
   amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
