@@ -4,6 +4,14 @@ import matter from 'gray-matter';
 import Navbar from './components/Navbar';
 import PartnersCarouselWrapper from './components/PartnersCarouselWrapper';
 
+// Add Oswald font import to the head (for demo, you may want to move this to _document.js or globals.css in a real app)
+if (typeof window !== 'undefined') {
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap';
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
+}
+
 async function getSingleContent(filePath) {
   try {
     const file = await readFile(filePath, 'utf8');
@@ -136,17 +144,16 @@ export default async function Home() {
             </div>
             <div className="testimonials-grid">
               {testimonialsArr.map((t, i) => (
-                <div key={i} className="testimonial-card">
-                  <div className="testimonial-content">
-                    <blockquote className="testimonial-quote" style={{ fontSize: '1.25rem', fontWeight: 500, color: '#222', borderLeft: '4px solid #2563eb', paddingLeft: 16, marginBottom: 16, background: '#f8fafc', borderRadius: 8 }}>
-                      “{t.quote}”
+                <div key={i} style={{ background: 'none', boxShadow: 'none', border: 'none', padding: '1.5rem 0', margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
+                    <blockquote style={{ fontSize: '1.1rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7 }}>
+                      {t.quote}
                     </blockquote>
-                    <div className="testimonial-author">
-                      {t.photo && <img src={t.photo} alt={t.name} className="author-photo" />}
-                      <div className="author-info">
-                        <h4>{t.name}</h4>
-                      </div>
-                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
+                    {t.photo && <img src={t.photo} alt={t.name} style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover' }} />}
+                    <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 15 }}>{t.name}</div>
                   </div>
                 </div>
               ))}
