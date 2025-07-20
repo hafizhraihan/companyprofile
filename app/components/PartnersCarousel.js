@@ -22,12 +22,12 @@ export default function PartnersCarousel({ logos }) {
   }, []);
 
   // Duplicate logos for seamless loop
-  const allLogos = [...logos, ...logos];
+  const allLogos = Array.isArray(logos) ? [...logos, ...logos] : [];
 
   return (
     <div className="partners-carousel-wrapper">
       <div className="partners-carousel" ref={carouselRef}>
-        {allLogos.map((logo, idx) => (
+        {Array.isArray(allLogos) && allLogos.map((logo, idx) => (
           <div className="carousel-logo" key={idx}>
             <img src={logo} alt="Partner logo" />
           </div>

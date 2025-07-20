@@ -12,10 +12,10 @@ export default function Navbar({ logo, items }) {
           {logo ? <img src={logo} alt="Logo" style={{ height: 40 }} /> : <span>Logo</span>}
         </Link>
         <ul className="navbar-menu">
-          {items.map((item, idx) => (
+          {Array.isArray(items) && items.map((item, idx) => (
             <li
               key={idx}
-              className={`navbar-item${item.dropdown && item.dropdown.length ? " has-dropdown" : ""}`}
+              className={`navbar-item${Array.isArray(item.dropdown) && item.dropdown.length ? " has-dropdown" : ""}`}
               onMouseEnter={() => setOpenDropdown(idx)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
@@ -24,7 +24,7 @@ export default function Navbar({ logo, items }) {
               ) : (
                 <span>{item.label}</span>
               )}
-              {item.dropdown && item.dropdown.length > 0 && (
+              {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
                 <ul className={`navbar-dropdown${openDropdown === idx ? " open" : ""}`}>
                   {item.dropdown.map((sub, subIdx) => (
                     <li key={subIdx} className="navbar-dropdown-item">
