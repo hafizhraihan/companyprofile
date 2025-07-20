@@ -75,11 +75,11 @@ export default function PartnersCarousel({ logos }) {
         }
         .carousel-fade-left {
           left: 0;
-          background: linear-gradient(to right, #fff 80%, transparent 100%);
+          background: linear-gradient(to right, #fff 50%, transparent 100%);
         }
         .carousel-fade-right {
           right: 0;
-          background: linear-gradient(to left, #fff 80%, transparent 100%);
+          background: linear-gradient(to left, #fff 50%, transparent 100%);
         }
         @media (max-width: 700px) {
           .partners-carousel {
