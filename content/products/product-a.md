@@ -1,5 +1,5 @@
 ---
 name: Product A
 description: Lorem ipsum dolor sit amet.
-image: /images/uploads/untitled-design-28-.png
+image: /images/uploads/mika-baumeister-cmoxzomsufe-unsplash.jpg
 ---
