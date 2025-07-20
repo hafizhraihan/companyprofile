@@ -49,14 +49,17 @@ export default async function Home() {
   const statistics = (await getSingleContent('content/statistics.md')) || {};
 
   // Partner logos for carousel
-  const partnerLogos = (partners || []).map(p => p.logo).filter(Boolean);
-
+  const partnerLogos = Array.isArray(partners) ? partners.map(p => p.logo).filter(Boolean) : [];
   // Navbar logo (use hero image as fallback)
   const navbarLogo = hero.image || '';
+  // Defensive array checks
+  const stats = Array.isArray(statistics.stats) ? statistics.stats : [];
+  const productsArr = Array.isArray(products) ? products : [];
+  const testimonialsArr = Array.isArray(testimonials) ? testimonials : [];
 
   return (
     <>
-      <Navbar logo={navbarLogo} items={navbarItems || []} />
+      <Navbar logo={navbarLogo} items={Array.isArray(navbarItems) ? navbarItems : []} />
       <main>
         {/* Hero Section as background */}
         <section
@@ -86,7 +89,7 @@ export default async function Home() {
               <p>{statisticsSection.section_description}</p>
             </div>
             <div className="stats-grid">
-              {(statistics?.stats || []).map((stat, i) => (
+              {stats.map((stat, i) => (
                 <div key={i} className="stat-card">
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
@@ -102,7 +105,7 @@ export default async function Home() {
               <p>{productsSection.section_description}</p>
             </div>
             <div className="products-grid">
-              {(products || []).map((prod, i) => (
+              {productsArr.map((prod, i) => (
                 <div key={i} className="product-card">
                   {prod.image && <img src={prod.image} alt={prod.name} className="product-image" />}
                   <div className="product-content">
@@ -130,7 +133,7 @@ export default async function Home() {
               <p>{testimonialsSection.section_description}</p>
             </div>
             <div className="testimonials-grid">
-              {(testimonials || []).map((t, i) => (
+              {testimonialsArr.map((t, i) => (
                 <div key={i} className="testimonial-card">
                   <div className="testimonial-content">
                     <blockquote className="testimonial-quote">{t.quote}</blockquote>
