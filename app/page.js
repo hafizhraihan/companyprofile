@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import Navbar from './components/Navbar';
 import PartnersCarouselWrapper from './components/PartnersCarouselWrapper';
+import TestimonialSlider from './components/TestimonialSlider';
 
 // Add Oswald font import to the head (for demo, you may want to move this to _document.js or globals.css in a real app)
 if (typeof window !== 'undefined') {
@@ -142,22 +143,7 @@ export default async function Home() {
               <h2>{testimonialsSection.section_title}</h2>
               <p>{testimonialsSection.section_description}</p>
             </div>
-            <div className="testimonials-grid">
-              {testimonialsArr.map((t, i) => (
-                <div key={i} style={{ background: 'none', boxShadow: 'none', border: 'none', padding: '1.5rem 0', margin: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12 }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                    <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
-                    <blockquote style={{ fontSize: '1.1rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7 }}>
-                      {t.quote}
-                    </blockquote>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
-                    {t.photo && <img src={t.photo} alt={t.name} style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover' }} />}
-                    <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 15 }}>{t.name}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <TestimonialSlider testimonials={testimonialsArr} />
           </section>
 
           {/* Contact Section */}

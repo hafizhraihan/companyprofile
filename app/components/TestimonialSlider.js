@@ -1,0 +1,119 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+
+export default function TestimonialSlider({ testimonials }) {
+  const [index, setIndex] = useState(0);
+  const timerRef = useRef();
+  const count = Array.isArray(testimonials) ? testimonials.length : 0;
+
+  useEffect(() => {
+    if (count < 2) return;
+    timerRef.current = setInterval(() => {
+      setIndex((prev) => (prev + 1) % count);
+    }, 5000);
+    return () => clearInterval(timerRef.current);
+  }, [count]);
+
+  const goTo = (i) => {
+    setIndex(i);
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+  const prev = () => goTo((index - 1 + count) % count);
+  const next = () => goTo((index + 1) % count);
+
+  if (!Array.isArray(testimonials) || testimonials.length === 0) return null;
+  const t = testimonials[index];
+
+  return (
+    <div className="testimonial-slider">
+      <div className="testimonial-slider-inner">
+        <button className="slider-arrow left" onClick={prev} aria-label="Previous testimonial">&#8592;</button>
+        <div className="testimonial-slide">
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
+            <blockquote style={{ fontSize: '1.1rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7 }}>
+              {t.quote}
+            </blockquote>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8 }}>
+            {t.photo && <img src={t.photo} alt={t.name} style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover' }} />}
+            <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 15 }}>{t.name}</div>
+          </div>
+        </div>
+        <button className="slider-arrow right" onClick={next} aria-label="Next testimonial">&#8594;</button>
+      </div>
+      <div className="slider-dots">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            className={`slider-dot${i === index ? " active" : ""}`}
+            onClick={() => goTo(i)}
+            aria-label={`Go to testimonial ${i + 1}`}
+          />
+        ))}
+      </div>
+      <style jsx>{`
+        .testimonial-slider {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .testimonial-slider-inner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          gap: 0.5rem;
+        }
+        .testimonial-slide {
+          min-width: 0;
+          flex: 1 1 0;
+          max-width: 500px;
+          margin: 0 1rem;
+        }
+        .slider-arrow {
+          background: #f3f4f6;
+          border: none;
+          color: #2563eb;
+          font-size: 2rem;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .slider-arrow:hover {
+          background: #e0e7ef;
+        }
+        .slider-arrow.left {
+          margin-right: 0.5rem;
+        }
+        .slider-arrow.right {
+          margin-left: 0.5rem;
+        }
+        .slider-dots {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 1rem;
+        }
+        .slider-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #e5e7eb;
+          border: none;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .slider-dot.active {
+          background: #2563eb;
+        }
+      `}</style>
+    </div>
+  );
+} 
