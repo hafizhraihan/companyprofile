@@ -19,7 +19,9 @@ collections:
     folder: "content/navbar"
     create: true
     slug: "{{fields.label}}"
+    sortable_fields: ["order"]
     fields:
+      - { label: "Order", name: "order", widget: "number", required: false, default: 0 }
       - { label: "Label", name: "label", widget: "string" }
       - { label: "Link", name: "link", widget: "string", required: false }
       - label: "Dropdown Items"

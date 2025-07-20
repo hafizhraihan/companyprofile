@@ -2,12 +2,12 @@
 import React from "react";
 
 export default function PartnersCarousel({ logos }) {
-  // Duplicate logos for seamless loop
-  const allLogos = Array.isArray(logos) ? [...logos, ...logos] : [];
+  // Duplicate logos for seamless loop (at least 4x for smoothness)
+  const allLogos = Array.isArray(logos) ? [...logos, ...logos, ...logos, ...logos] : [];
 
   return (
     <div className="partners-carousel-wrapper">
-      <div className="partners-carousel animated-carousel">
+      <div className="partners-carousel seamless-carousel">
         {Array.isArray(allLogos) && allLogos.map((logo, idx) => (
           <div className="carousel-logo" key={idx}>
             <img src={logo} alt="Partner logo" />
@@ -28,15 +28,15 @@ export default function PartnersCarousel({ logos }) {
           min-width: 100%;
           align-items: center;
         }
-        .animated-carousel {
-          animation: scroll-carousel 30s linear infinite;
+        .seamless-carousel {
+          animation: seamless-scroll 40s linear infinite;
         }
-        @keyframes scroll-carousel {
+        @keyframes seamless-scroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-25%);
           }
         }
         .carousel-logo {

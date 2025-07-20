@@ -9,32 +9,34 @@ export default function Navbar({ logo, items }) {
     <nav className="navbar">
       <div className="navbar-container">
         <Link href="/" className="navbar-logo">
-          {logo ? <img src={logo} alt="Logo" style={{ height: 40 }} /> : <span>Logo</span>}
+          {logo ? <img src={logo} alt="Logo" style={{ height: 40, borderRadius: 0 }} /> : <span>Logo</span>}
         </Link>
         <ul className="navbar-menu">
-          {Array.isArray(items) && items.map((item, idx) => (
-            <li
-              key={idx}
-              className={`navbar-item${Array.isArray(item.dropdown) && item.dropdown.length ? " has-dropdown" : ""}`}
-              onMouseEnter={() => setOpenDropdown(idx)}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              {item.link ? (
-                <Link href={item.link}>{item.label}</Link>
-              ) : (
-                <span>{item.label}</span>
-              )}
-              {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
-                <ul className={`navbar-dropdown${openDropdown === idx ? " open" : ""}`}>
-                  {item.dropdown.map((sub, subIdx) => (
-                    <li key={subIdx} className="navbar-dropdown-item">
-                      <Link href={sub.link}>{sub.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+          {Array.isArray(items) && items
+            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+            .map((item, idx) => (
+              <li
+                key={idx}
+                className={`navbar-item${Array.isArray(item.dropdown) && item.dropdown.length ? " has-dropdown" : ""}`}
+                onMouseEnter={() => setOpenDropdown(idx)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                {item.link ? (
+                  <Link href={item.link}>{item.label}</Link>
+                ) : (
+                  <span>{item.label}</span>
+                )}
+                {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
+                  <ul className={`navbar-dropdown${openDropdown === idx ? " open" : ""}`}>
+                    {item.dropdown.map((sub, subIdx) => (
+                      <li key={subIdx} className="navbar-dropdown-item">
+                        <Link href={sub.link}>{sub.label}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
         </ul>
       </div>
       <style jsx>{`
@@ -55,6 +57,7 @@ export default function Navbar({ logo, items }) {
         }
         .navbar-logo img {
           height: 40px;
+          border-radius: 0;
         }
         .navbar-menu {
           display: flex;
