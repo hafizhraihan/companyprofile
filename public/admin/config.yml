@@ -113,6 +113,7 @@ collections:
     slug: "{{fields.name}}"
     fields:
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Position", name: "position", widget: "string", required: false }
       - { label: "Quote", name: "quote", widget: "text" }
       - { label: "Photo", name: "photo", widget: "image", required: false }
 
