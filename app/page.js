@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import Navbar from './components/Navbar';
 import PartnersCarouselWrapper from './components/PartnersCarouselWrapper';
 import TestimonialSlider from './components/TestimonialSlider';
+import React from 'react'; // Added missing import for React
 
 // Add Oswald font import to the head (for demo, you may want to move this to _document.js or globals.css in a real app)
 if (typeof window !== 'undefined') {
@@ -99,12 +100,15 @@ export default async function Home() {
               <h2>{statisticsSection.section_title}</h2>
               <p>{statisticsSection.section_description}</p>
             </div>
-            <div className="stats-grid">
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 0 }}>
               {stats.map((stat, i) => (
-                <div key={i} className="stat-card">
-                  <div className="stat-value">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
+                <React.Fragment key={i}>
+                  {i > 0 && <div style={{ width: 1, height: 36, background: '#e5e7eb', margin: '0 2rem' }} />}
+                  <div style={{ textAlign: 'center', minWidth: 80 }}>
+                    <div style={{ fontSize: 24, fontWeight: 700, color: '#2563eb' }}>{stat.value}</div>
+                    <div style={{ color: '#6b7280', fontWeight: 500, fontSize: 15 }}>{stat.label}</div>
+                  </div>
+                </React.Fragment>
               ))}
             </div>
           </section>
@@ -145,38 +149,25 @@ export default async function Home() {
             </div>
             <TestimonialSlider testimonials={testimonialsArr} />
           </section>
-
-          {/* Contact Section */}
-          <section className="contact-section" style={{ background: '#fff', borderRadius: 16, boxShadow: '0 2px 12px rgba(0,0,0,0.04)', padding: '3rem 0', marginBottom: 48 }}>
-            <div className="section-title">
-              <h2>{contactSection.section_title}</h2>
-              <p>{contactSection.section_description}</p>
-            </div>
-            <div className="contact-card" style={{ background: 'none', boxShadow: 'none', border: 'none', maxWidth: 420, margin: '0 auto', padding: 0 }}>
-              <div className="contact-info" style={{ gap: 24 }}>
-                <div className="contact-item" style={{ background: 'none', padding: 0, borderRadius: 0, borderBottom: '1px solid #e5e7eb', marginBottom: 12 }}>
-                  <strong style={{ minWidth: 80, color: '#2563eb' }}>Address:</strong>
-                  <span>{contact.address}</span>
-                </div>
-                <div className="contact-item" style={{ background: 'none', padding: 0, borderRadius: 0, borderBottom: '1px solid #e5e7eb', marginBottom: 12 }}>
-                  <strong style={{ minWidth: 80, color: '#2563eb' }}>Phone:</strong>
-                  <span>{contact.phone}</span>
-                </div>
-                <div className="contact-item" style={{ background: 'none', padding: 0, borderRadius: 0, borderBottom: '1px solid #e5e7eb', marginBottom: 12 }}>
-                  <strong style={{ minWidth: 80, color: '#2563eb' }}>Email:</strong>
-                  <span>{contact.email}</span>
-                </div>
-              </div>
-              {contact.map_embed && <div style={{ marginTop: 24, borderRadius: 12, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }} dangerouslySetInnerHTML={{ __html: contact.map_embed }} />}
-            </div>
-          </section>
         </div>
       </main>
+      {/* WhatsApp CTA */}
+      <section style={{ background: '#2563eb', color: '#fff', padding: '2rem 0', textAlign: 'center', marginTop: 48 }}>
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+          <div style={{ fontSize: 24, fontWeight: 600 }}>Ready to talk to us?</div>
+          <a href={`https://wa.me/${contact.phone ? contact.phone.replace(/\D/g, '') : ''}`} target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: '#2563eb', fontWeight: 700, fontSize: 18, borderRadius: 8, padding: '0.75rem 2rem', textDecoration: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'inline-block', marginTop: 8 }}>Chat on WhatsApp</a>
+        </div>
+      </section>
       {/* Footer */}
-      <footer style={{ background: '#1a1a1a', color: '#fff', padding: '2rem 0', marginTop: 48 }}>
-        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+      <footer style={{ background: '#1a1a1a', color: '#fff', padding: '2rem 0', marginTop: 0 }}>
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
           {navbarLogo && <img src={navbarLogo} alt="Logo" style={{ height: 36, marginBottom: 12, borderRadius: 0 }} />}
           <div style={{ fontWeight: 600, fontSize: 18, letterSpacing: 1 }}>© {new Date().getFullYear()} {site.company || 'Your Company Name'}. All rights reserved.</div>
+          <div style={{ marginTop: 16, color: '#e5e7eb', fontSize: 15, textAlign: 'center' }}>
+            <div><strong>Address:</strong> {contact.address}</div>
+            <div><strong>Phone:</strong> {contact.phone}</div>
+            <div><strong>Email:</strong> {contact.email}</div>
+          </div>
         </div>
       </footer>
     </>

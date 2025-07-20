@@ -43,7 +43,7 @@ export default function TestimonialSlider({ testimonials }) {
               {t.photo && <img src={t.photo} alt={t.name} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
                 <div style={{ fontWeight: 600, color: '#2563eb', fontSize: 16 }}>{t.name}</div>
-                {t.position && <div style={{ color: '#6b7280', fontSize: 14, marginTop: 2 }}>{t.position}</div>}
+                {t.position && <div style={{ color: '#6b7280', fontSize: 14, marginTop: 0 }}>{t.position}</div>}
               </div>
             </div>
           </div>
