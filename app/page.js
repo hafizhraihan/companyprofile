@@ -5,8 +5,12 @@ import Navbar from './components/Navbar';
 import PartnersCarouselWrapper from './components/PartnersCarouselWrapper';
 
 async function getSingleContent(filePath) {
-  const file = await readFile(filePath, 'utf8');
-  return matter(file).data;
+  try {
+    const file = await readFile(filePath, 'utf8');
+    return matter(file).data;
+  } catch {
+    return {};
+  }
 }
 
 async function getCollectionContent(folderPath) {
@@ -28,21 +32,21 @@ async function getCollectionContent(folderPath) {
 
 export default async function Home() {
   // Navbar
-  let navbarItems = await getCollectionContent('content/navbar');
+  let navbarItems = (await getCollectionContent('content/navbar')) || [];
   // Hero
-  const hero = await getSingleContent('content/hero.md');
+  const hero = (await getSingleContent('content/hero.md')) || {};
   // Section settings
-  const statisticsSection = await getSingleContent('content/statistics.md');
-  const productsSection = await getSingleContent('content/products_section.md');
-  const partnersSection = await getSingleContent('content/partners_section.md');
-  const testimonialsSection = await getSingleContent('content/testimonials_section.md');
-  const contactSection = await getSingleContent('content/contact_section.md');
+  const statisticsSection = (await getSingleContent('content/statistics.md')) || {};
+  const productsSection = (await getSingleContent('content/products_section.md')) || {};
+  const partnersSection = (await getSingleContent('content/partners_section.md')) || {};
+  const testimonialsSection = (await getSingleContent('content/testimonials_section.md')) || {};
+  const contactSection = (await getSingleContent('content/contact_section.md')) || {};
   // Content collections
-  const testimonials = await getCollectionContent('content/testimonials');
-  const partners = await getCollectionContent('content/partners');
-  const products = await getCollectionContent('content/products');
-  const contact = await getSingleContent('content/contact.md');
-  const statistics = await getSingleContent('content/statistics.md');
+  const testimonials = (await getCollectionContent('content/testimonials')) || [];
+  const partners = (await getCollectionContent('content/partners')) || [];
+  const products = (await getCollectionContent('content/products')) || [];
+  const contact = (await getSingleContent('content/contact.md')) || {};
+  const statistics = (await getSingleContent('content/statistics.md')) || {};
 
   // Partner logos for carousel
   const partnerLogos = (partners || []).map(p => p.logo).filter(Boolean);
@@ -82,7 +86,7 @@ export default async function Home() {
               <p>{statisticsSection.section_description}</p>
             </div>
             <div className="stats-grid">
-              {(statistics.stats || []).map((stat, i) => (
+              {(statistics?.stats || []).map((stat, i) => (
                 <div key={i} className="stat-card">
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
