@@ -76,41 +76,65 @@ export default function Navbar({ logo, items }) {
           position: relative;
         }
         .navbar-item > a, .navbar-item > span {
-          color: #1a1a1a;
+          color: #1a1a1a !important; /* Override global a color */
           font-weight: 500;
           text-decoration: none;
           padding: 0.5rem 0.75rem;
           border-radius: 6px;
-          transition: background 0.2s;
+          transition: background 0.2s, color 0.2s;
+          background: none;
         }
         .navbar-item > a:hover, .navbar-item > span:hover {
           background: #f3f4f6;
+          color: #1a1a1a;
         }
         .navbar-dropdown {
-          display: none;
+          display: block;
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(10px) scaleY(0.98);
+          transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
           position: absolute;
           left: 0;
           top: 100%;
           background: #fff;
           border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          min-width: 180px;
+          border-radius: 12px;
+          min-width: 200px;
           box-shadow: 0 8px 24px rgba(0,0,0,0.12);
           z-index: 10;
           padding: 0.5rem 0;
+          visibility: hidden;
         }
         .navbar-dropdown.open {
-          display: block;
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0) scaleY(1);
+          visibility: visible;
         }
         .navbar-dropdown-item a {
           display: block;
-          padding: 0.75rem 1rem;
-          color: #1a1a1a;
+          padding: 0.75rem 1.25rem;
+          color: #1a1a1a !important;
           text-decoration: none;
-          transition: background 0.2s;
+          border-radius: 6px;
+          transition: background 0.18s, color 0.18s;
         }
         .navbar-dropdown-item a:hover {
           background: #f3f4f6;
+          color: #2563eb !important;
+        }
+        .navbar-item.has-dropdown > a, .navbar-item.has-dropdown > span {
+          padding-right: 1.5rem;
+        }
+        .navbar-item .navbar-dropdown {
+          margin-top: 0.25rem;
+        }
+        .navbar-item > a > span, .navbar-item > span > span {
+          font-size: 14px;
+          margin-left: 2px;
+          display: inline-block;
+          transform: rotate(180deg);
         }
         @media (max-width: 700px) {
           .navbar-container {
