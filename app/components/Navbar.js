@@ -24,12 +24,24 @@ export default function Navbar({ logo, items }) {
                 {item.link ? (
                   <Link href={item.link || "#"} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {item.label}
-                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2 }}>&#709;</span>}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', marginLeft: 2 }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" style={{ display: 'inline', verticalAlign: 'middle' }}>
+                          <path fill="currentColor" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
+                        </svg>
+                      </span>
+                    )}
                   </Link>
                 ) : (
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {item.label}
-                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2 }}>&#709;</span>}
+                    {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', marginLeft: 2 }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" style={{ display: 'inline', verticalAlign: 'middle' }}>
+                          <path fill="currentColor" d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
+                        </svg>
+                      </span>
+                    )}
                   </span>
                 )}
                 {Array.isArray(item.dropdown) && item.dropdown.length > 0 && (
