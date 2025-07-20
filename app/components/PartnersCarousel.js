@@ -1,32 +1,13 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React from "react";
 
 export default function PartnersCarousel({ logos }) {
-  const carouselRef = useRef(null);
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    let animationId;
-    let scrollAmount = 0.5;
-    function animate() {
-      if (carousel) {
-        carousel.scrollLeft += scrollAmount;
-        if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
-          carousel.scrollLeft = 0;
-        }
-      }
-      animationId = requestAnimationFrame(animate);
-    }
-    animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationId);
-  }, []);
-
   // Duplicate logos for seamless loop
   const allLogos = Array.isArray(logos) ? [...logos, ...logos] : [];
 
   return (
     <div className="partners-carousel-wrapper">
-      <div className="partners-carousel" ref={carouselRef}>
+      <div className="partners-carousel animated-carousel">
         {Array.isArray(allLogos) && allLogos.map((logo, idx) => (
           <div className="carousel-logo" key={idx}>
             <img src={logo} alt="Partner logo" />
@@ -46,7 +27,17 @@ export default function PartnersCarousel({ logos }) {
           width: max-content;
           min-width: 100%;
           align-items: center;
-          scroll-behavior: auto;
+        }
+        .animated-carousel {
+          animation: scroll-carousel 30s linear infinite;
+        }
+        @keyframes scroll-carousel {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
         .carousel-logo {
           flex: 0 0 auto;

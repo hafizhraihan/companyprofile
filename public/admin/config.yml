@@ -6,6 +6,14 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - label: "General"
+        name: "general"
+        file: "content/site.md"
+        fields:
+          - { label: "Logo", name: "logo", widget: "image" }
   - name: "navbar"
     label: "Navbar"
     folder: "content/navbar"

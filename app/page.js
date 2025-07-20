@@ -31,6 +31,8 @@ async function getCollectionContent(folderPath) {
 }
 
 export default async function Home() {
+  // Site settings
+  const site = (await getSingleContent('content/site.md')) || {};
   // Navbar
   let navbarItems = (await getCollectionContent('content/navbar')) || [];
   // Hero
@@ -50,8 +52,8 @@ export default async function Home() {
 
   // Partner logos for carousel
   const partnerLogos = Array.isArray(partners) ? partners.map(p => p.logo).filter(Boolean) : [];
-  // Navbar logo (use hero image as fallback)
-  const navbarLogo = hero.image || '';
+  // Navbar logo (use site logo if available)
+  const navbarLogo = site.logo || '';
   // Defensive array checks
   const stats = Array.isArray(statistics.stats) ? statistics.stats : [];
   const productsArr = Array.isArray(products) ? products : [];
