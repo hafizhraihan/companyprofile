@@ -136,7 +136,7 @@ export default function TestimonialSlider({ testimonials }) {
           min-width: 280px;
           min-height: 180px;
           max-height: 220px;
-          width: 480px;
+          width: 700px;
           overflow: hidden;
           justify-content: center;
         }
@@ -203,7 +203,7 @@ export default function TestimonialSlider({ testimonials }) {
           border-radius: 16px;
           box-shadow: 0 2px 24px rgba(0,0,0,0.18);
           padding: 2.5rem 2rem 2rem 2rem;
-          max-width: 420px;
+          max-width: 700px;
           width: 100%;
           position: relative;
           display: flex;
