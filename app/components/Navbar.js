@@ -22,7 +22,7 @@ export default function Navbar({ logo, items }) {
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 {item.link ? (
-                  <Link href={item.link} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  <Link href={item.link || "#"} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                     {item.label}
                     {Array.isArray(item.dropdown) && item.dropdown.length > 0 && <span style={{ fontSize: 14, marginLeft: 2 }}>&#709;</span>}
                   </Link>
@@ -75,18 +75,19 @@ export default function Navbar({ logo, items }) {
         .navbar-item {
           position: relative;
         }
-        .navbar-item > a, .navbar-item > span {
-          color: #1a1a1a !important; /* Override global a color */
+        .navbar-item > a {
+          color: #1a1a1a !important;
           font-weight: 500;
           text-decoration: none;
           padding: 0.5rem 0.75rem;
-          border-radius: 6px;
-          transition: background 0.2s, color 0.2s;
           background: none;
+          border-radius: 6px;
+          transition: background 0.2s, color 0.2s, transform 0.18s cubic-bezier(.4,0,.2,1);
         }
-        .navbar-item > a:hover, .navbar-item > span:hover {
+        .navbar-item > a:hover {
           background: #f3f4f6;
           color: #1a1a1a;
+          transform: scale(1.08);
         }
         .navbar-dropdown {
           display: block;
@@ -128,7 +129,7 @@ export default function Navbar({ logo, items }) {
           padding-right: 1.5rem;
         }
         .navbar-item .navbar-dropdown {
-          margin-top: 0.25rem;
+          margin-top: 0;
         }
         .navbar-item > a > span, .navbar-item > span > span {
           font-size: 14px;
