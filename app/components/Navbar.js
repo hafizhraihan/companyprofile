@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export default function Navbar({ logo, items }) {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <nav className="navbar">
@@ -11,7 +12,10 @@ export default function Navbar({ logo, items }) {
         <Link href="/" className="navbar-logo">
           {logo ? <img src={logo} alt="Logo" style={{ height: 40, borderRadius: 0 }} /> : <span>Logo</span>}
         </Link>
-        <ul className="navbar-menu">
+        <button className="navbar-hamburger" aria-label="Open menu" onClick={() => setMobileOpen(v => !v)}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+        <ul className="navbar-menu" style={mobileOpen ? { display: 'flex' } : {}}>
           {Array.isArray(items) && items
             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
             .map((item, idx) => (
@@ -159,6 +163,15 @@ export default function Navbar({ logo, items }) {
           display: inline-block;
           transform: rotate(180deg);
         }
+        .navbar-hamburger {
+          display: none;
+          background: none;
+          border: none;
+          padding: 6px 8px;
+          margin-left: 8px;
+          cursor: pointer;
+          z-index: 120;
+        }
         @media (max-width: 700px) {
           .navbar-container {
             flex-direction: column;
@@ -168,6 +181,20 @@ export default function Navbar({ logo, items }) {
             flex-direction: column;
             gap: 0.5rem;
             width: 100%;
+            display: none;
+            background: #fff;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            box-shadow: 0 8px 32px 0 rgba(40,60,90,0.13), 0 1.5px 6px 0 rgba(40,60,90,0.07);
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            padding-bottom: 1rem;
+            z-index: 110;
+          }
+          .navbar-hamburger {
+            display: block;
           }
         }
       `}</style>
