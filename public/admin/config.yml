@@ -148,3 +148,17 @@ collections:
         fields:
           - { label: "Section Title", name: "section_title", widget: "string", default: "Get in Touch" }
           - { label: "Section Description", name: "section_description", widget: "string", default: "Ready to start your next project? Let's discuss how we can help you achieve your goals." } 
+
+  - name: "footer_sections"
+    label: "Footer Sections"
+    folder: "content/footer_sections"
+    create: true
+    slug: "{{fields.title}}"
+    fields:
+      - { label: "Section Title", name: "title", widget: "string" }
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        fields:
+          - { label: "Link Name", name: "name", widget: "string" }
+          - { label: "Link Ref", name: "ref", widget: "string" } 
