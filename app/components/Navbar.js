@@ -106,12 +106,16 @@ export default function Navbar({ logo, items }) {
           z-index: 10;
           padding: 0.5rem 0;
           visibility: hidden;
+          list-style: none;
         }
         .navbar-dropdown.open {
           opacity: 1;
           pointer-events: auto;
           transform: translateY(0) scaleY(1);
           visibility: visible;
+        }
+        .navbar-dropdown-item {
+          list-style: none;
         }
         .navbar-dropdown-item a {
           display: block;
