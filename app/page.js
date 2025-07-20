@@ -187,7 +187,7 @@ export default async function Home() {
         </div>
       </main>
       {/* WhatsApp CTA */}
-      <section style={{ background: '#2563eb', color: '#fff', padding: '2rem 0', textAlign: 'center', marginTop: 0 }}>
+      <section style={{ background: '#2563eb', color: '#fff', padding: '2rem 0', textAlign: 'center', marginTop: 0, marginBottom: 0 }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
           <div style={{ fontSize: 24, fontWeight: 600 }}>Ready to talk to us?</div>
           <a href={`https://wa.me/${contact.phone ? contact.phone.replace(/\D/g, '') : ''}`} target="_blank" rel="noopener noreferrer" style={{ background: '#fff', color: '#2563eb', fontWeight: 700, fontSize: 18, borderRadius: 8, padding: '0.75rem 2rem', textDecoration: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'inline-block', marginTop: 8 }}>Chat on WhatsApp</a>
@@ -213,17 +213,6 @@ export default async function Home() {
               )}
             </div>
           </div>
-          {/* Admin-editable footer sections */}
-          {footerSections.filter(s => s.title && s.title.toLowerCase().includes('social')).map((section, idx) => (
-            <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {Array.isArray(section.links) && section.links.map((link, i) => (
-                <a key={i} href={link.ref} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none', fontSize: 15, display: 'flex', alignItems: 'center', gap: 8 }}>
-                  {getSocialIcon(link.name)}
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          ))}
         </div>
         <div style={{ borderTop: '1px solid #2d2d2d', marginTop: 24, padding: '1.2rem 0 0 0', textAlign: 'center', color: '#e5e7eb', fontSize: 15 }}>
           © {new Date().getFullYear()} {site.company || 'Your Company Name'}. All rights reserved.
