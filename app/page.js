@@ -10,24 +10,25 @@ async function getSingleContent(filePath) {
 }
 
 async function getCollectionContent(folderPath) {
-  const files = await readdir(folderPath);
-  const items = [];
-  for (const file of files) {
-    if (file.endsWith('.md')) {
-      const filePath = path.join(folderPath, file);
-      const fileContent = await readFile(filePath, 'utf8');
-      items.push(matter(fileContent).data);
+  try {
+    const files = await readdir(folderPath);
+    const items = [];
+    for (const file of files) {
+      if (file.endsWith('.md')) {
+        const filePath = path.join(folderPath, file);
+        const fileContent = await readFile(filePath, 'utf8');
+        items.push(matter(fileContent).data);
+      }
     }
+    return items;
+  } catch {
+    return [];
   }
-  return items;
 }
 
 export default async function Home() {
   // Navbar
-  let navbarItems = [];
-  try {
-    navbarItems = await getCollectionContent('content/navbar');
-  } catch {}
+  let navbarItems = await getCollectionContent('content/navbar');
   // Hero
   const hero = await getSingleContent('content/hero.md');
   // Section settings
@@ -44,14 +45,14 @@ export default async function Home() {
   const statistics = await getSingleContent('content/statistics.md');
 
   // Partner logos for carousel
-  const partnerLogos = partners.map(p => p.logo).filter(Boolean);
+  const partnerLogos = (partners || []).map(p => p.logo).filter(Boolean);
 
   // Navbar logo (use hero image as fallback)
   const navbarLogo = hero.image || '';
 
   return (
     <>
-      <Navbar logo={navbarLogo} items={navbarItems} />
+      <Navbar logo={navbarLogo} items={navbarItems || []} />
       <main>
         {/* Hero Section as background */}
         <section
@@ -81,7 +82,7 @@ export default async function Home() {
               <p>{statisticsSection.section_description}</p>
             </div>
             <div className="stats-grid">
-              {statistics.stats && statistics.stats.map((stat, i) => (
+              {(statistics.stats || []).map((stat, i) => (
                 <div key={i} className="stat-card">
                   <div className="stat-value">{stat.value}</div>
                   <div className="stat-label">{stat.label}</div>
@@ -97,7 +98,7 @@ export default async function Home() {
               <p>{productsSection.section_description}</p>
             </div>
             <div className="products-grid">
-              {products.map((prod, i) => (
+              {(products || []).map((prod, i) => (
                 <div key={i} className="product-card">
                   {prod.image && <img src={prod.image} alt={prod.name} className="product-image" />}
                   <div className="product-content">
@@ -125,7 +126,7 @@ export default async function Home() {
               <p>{testimonialsSection.section_description}</p>
             </div>
             <div className="testimonials-grid">
-              {testimonials.map((t, i) => (
+              {(testimonials || []).map((t, i) => (
                 <div key={i} className="testimonial-card">
                   <div className="testimonial-content">
                     <blockquote className="testimonial-quote">{t.quote}</blockquote>
