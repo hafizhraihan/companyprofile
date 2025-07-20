@@ -1,9 +1,8 @@
 import { readFile, readdir } from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import dynamic from 'next/dynamic';
 import Navbar from './components/Navbar';
-const PartnersCarousel = dynamic(() => import('./components/PartnersCarousel'), { ssr: false });
+import PartnersCarouselWrapper from './components/PartnersCarouselWrapper';
 
 async function getSingleContent(filePath) {
   const file = await readFile(filePath, 'utf8');
@@ -116,7 +115,7 @@ export default async function Home() {
               <h2>{partnersSection.section_title}</h2>
               <p>{partnersSection.section_description}</p>
             </div>
-            <PartnersCarousel logos={partnerLogos} />
+            <PartnersCarouselWrapper logos={partnerLogos} />
           </section>
 
           {/* Testimonials Section */}
