@@ -135,9 +135,9 @@ export default function TestimonialSlider({ testimonials }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          min-width: 260px;
+          min-width: 340px;
           min-height: 120px;
-          max-width: 700px;
+          max-width: 540px;
           width: 100%;
           overflow: hidden;
           justify-content: center;
