@@ -135,9 +135,9 @@ export default function TestimonialSlider({ testimonials }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          min-width: 220px;
+          min-width: 260px;
           min-height: 120px;
-          max-width: 340px;
+          max-width: 420px;
           width: 100%;
           overflow: hidden;
           justify-content: center;
@@ -259,9 +259,9 @@ export default function TestimonialSlider({ testimonials }) {
            margin: 0;
          }
          .testimonial-card-modern {
-           width: 96vw;
+           width: 82vw;
            min-width: 0;
-           max-width: 98vw;
+           max-width: 85vw;
            padding: 0.7rem 0.3rem;
            min-height: 90px;
            max-height: none;
