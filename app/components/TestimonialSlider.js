@@ -108,7 +108,7 @@ export default function TestimonialSlider({ testimonials }) {
         .testimonial-slide {
           min-width: 0;
           flex: 1 1 0;
-          max-width: 340px;
+          max-width: 600px;
           margin: 0 0.5rem;
           transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
           opacity: 1;
@@ -135,11 +135,11 @@ export default function TestimonialSlider({ testimonials }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          min-width: 220px;
+          min-width: 400px;
           min-height: 120px;
-          max-width: 320px;
-          max-height: 180px;
-          width: 320px;
+          max-width: 600px;
+          max-height: 220px;
+          width: 600px;
           overflow: hidden;
           justify-content: center;
         }
@@ -188,14 +188,14 @@ export default function TestimonialSlider({ testimonials }) {
         .slider-arrow.left {
           margin-right: 0.5rem;
           position: absolute;
-          left: -24px;
+          left: -38px;
           top: 50%;
           transform: translateY(-50%);
         }
         .slider-arrow.right {
           margin-left: 0.5rem;
           position: absolute;
-          right: -24px;
+          right: -38px;
           top: 50%;
           transform: translateY(-50%);
         }
