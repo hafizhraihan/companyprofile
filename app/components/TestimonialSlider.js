@@ -129,27 +129,51 @@ export default function TestimonialSlider({ testimonials }) {
         }
         .testimonial-card-modern {
           background: #fff;
-          border-radius: 14px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-          padding: 1.1rem 1rem;
+          border-radius: 12px;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+          padding: 0.7rem 0.7rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          min-width: 200px;
-          min-height: 120px;
-          max-height: 180px;
-          width: 320px;
+          min-width: 140px;
+          min-height: 80px;
+          max-height: 120px;
+          width: 200px;
           overflow: hidden;
           justify-content: center;
+        }
+        .testimonial-card-modern blockquote {
+          font-size: 0.92rem;
+          font-weight: 400;
+          color: #222;
+          border-left: 2px solid #2563eb;
+          padding-left: 8px;
+          margin: 0;
+          background: none;
+          border-radius: 0;
+          font-style: italic;
+          line-height: 1.5;
+          text-align: left;
+          flex: 1;
+        }
+        .testimonial-card-modern img {
+          width: 28px;
+          height: 28px;
+        }
+        .testimonial-card-modern div[style*='font-size: 16'] {
+          font-size: 12px !important;
+        }
+        .testimonial-card-modern div[style*='font-size: 20'] {
+          font-size: 13px !important;
         }
         .slider-arrow {
           background: #fff;
           border: 2px solid #2563eb;
           color: #2563eb;
-          font-size: 1.3rem;
+          font-size: 1rem;
           border-radius: 50%;
-          width: 32px;
-          height: 32px;
+          width: 22px;
+          height: 22px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -163,14 +187,14 @@ export default function TestimonialSlider({ testimonials }) {
         .slider-arrow.left {
           margin-right: 0.5rem;
           position: absolute;
-          left: -38px;
+          left: -24px;
           top: 50%;
           transform: translateY(-50%);
         }
         .slider-arrow.right {
           margin-left: 0.5rem;
           position: absolute;
-          right: -38px;
+          right: -24px;
           top: 50%;
           transform: translateY(-50%);
         }
@@ -180,8 +204,8 @@ export default function TestimonialSlider({ testimonials }) {
           margin-top: 0.7rem;
         }
         .slider-dot {
-          width: 8px;
-          height: 8px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
           background: #e5e7eb;
           border: none;
@@ -231,31 +255,31 @@ export default function TestimonialSlider({ testimonials }) {
            margin: 0;
          }
          .testimonial-card-modern {
-           width: 96vw;
+           width: 90vw;
            min-width: 0;
-           max-width: 98vw;
-           padding: 0.7rem 0.3rem;
-           min-height: 90px;
+           max-width: 95vw;
+           padding: 0.4rem 0.2rem;
+           min-height: 60px;
            max-height: none;
          }
          .slider-arrow {
-           width: 32px;
-           height: 32px;
-           font-size: 1.3rem;
+           width: 18px;
+           height: 18px;
+           font-size: 0.9rem;
          }
          .slider-arrow.left {
-           left: -18px;
+           left: -10px;
          }
          .slider-arrow.right {
-           right: -18px;
+           right: -10px;
          }
          .slider-dots {
            gap: 0.5rem;
            margin-top: 1rem;
          }
          .slider-dot {
-           width: 10px;
-           height: 10px;
+           width: 5px;
+           height: 5px;
          }
         }
       `}</style>
