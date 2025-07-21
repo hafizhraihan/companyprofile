@@ -266,28 +266,49 @@ export default function TestimonialSlider({ testimonials }) {
            font-size: 0.75rem;
          }
          .slider-arrow {
-           width: 14px;
-           height: 14px;
+           width: 28px;
+           height: 28px;
            aspect-ratio: 1 / 1;
-           font-size: 0.8rem;
+           font-size: 1.1rem;
            display: flex;
            align-items: center;
            justify-content: center;
+           border-radius: 50%;
+           border: 2px solid #2563eb;
+           background: #fff;
+           color: #2563eb;
+           box-shadow: 0 1px 4px rgba(40,60,90,0.07);
+           margin: 0 6px;
+           transition: background 0.18s, border-color 0.18s;
+         }
+         .slider-arrow:active {
+           background: #e0e7ef;
          }
          .slider-arrow.left {
-           left: -10px;
+           left: -18px;
          }
          .slider-arrow.right {
-           right: -10px;
+           right: -18px;
          }
          .slider-dots {
-           gap: 0.5rem;
-           margin-top: 1rem;
+           gap: 0.7rem;
+           margin-top: 1.2rem;
+           justify-content: center;
          }
          .slider-dot {
-           width: 5px;
-           height: 5px;
+           width: 10px;
+           height: 10px;
            aspect-ratio: 1 / 1;
+           border-radius: 50%;
+           background: #e5e7eb;
+           border: none;
+           cursor: pointer;
+           transition: background 0.2s;
+           display: inline-block;
+         }
+         .slider-dot.active {
+           background: #2563eb;
+           box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2563eb33;
          }
         }
       `}</style>
