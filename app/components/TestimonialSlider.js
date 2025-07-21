@@ -211,6 +211,38 @@ export default function TestimonialSlider({ testimonials }) {
           flex-direction: column;
           align-items: flex-start;
         }
+        @media (max-width: 700px) {
+          .testimonial-slider-inner {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+          .testimonial-slide {
+            max-width: 100vw;
+            margin: 0;
+          }
+          .testimonial-card-modern {
+            width: 98vw;
+            min-width: 0;
+            max-width: 100vw;
+            padding: 1.2rem 0.5rem;
+            min-height: 120px;
+            max-height: none;
+          }
+          .slider-arrow {
+            width: 48px;
+            height: 48px;
+            font-size: 2.2rem;
+            margin: 0.25rem 0;
+          }
+          .slider-dots {
+            gap: 1rem;
+            margin-top: 1.5rem;
+          }
+          .slider-dot {
+            width: 14px;
+            height: 14px;
+          }
+        }
       `}</style>
     </div>
   );

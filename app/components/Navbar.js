@@ -9,12 +9,14 @@ export default function Navbar({ logo, items }) {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link href="/" className="navbar-logo">
-          {logo ? <img src={logo} alt="Logo" style={{ height: 40, borderRadius: 0 }} /> : <span>Logo</span>}
-        </Link>
-        <button className="navbar-hamburger" aria-label="Open menu" onClick={() => setMobileOpen(v => !v)}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-        </button>
+        <div className="navbar-row">
+          <Link href="/" className="navbar-logo">
+            {logo ? <img src={logo} alt="Logo" style={{ height: 40, borderRadius: 0 }} /> : <span>Logo</span>}
+          </Link>
+          <button className="navbar-hamburger" aria-label="Open menu" onClick={() => setMobileOpen(v => !v)}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          </button>
+        </div>
         <ul className="navbar-menu" style={mobileOpen ? { display: 'flex' } : {}}>
           {Array.isArray(items) && items
             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
@@ -76,6 +78,12 @@ export default function Navbar({ logo, items }) {
           align-items: center;
           justify-content: space-between;
           padding: 0.5rem 1.5rem;
+        }
+        .navbar-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
         }
         .navbar-logo img {
           height: 40px;
@@ -175,7 +183,13 @@ export default function Navbar({ logo, items }) {
         @media (max-width: 700px) {
           .navbar-container {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: stretch;
+          }
+          .navbar-row {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
           }
           .navbar-menu {
             flex-direction: column;
