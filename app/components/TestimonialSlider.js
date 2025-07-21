@@ -44,7 +44,7 @@ export default function TestimonialSlider({ testimonials }) {
           <div className="testimonial-card-modern">
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, justifyContent: 'center' }}>
               <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
-              <blockquote className="testimonial-quote-block">
+              <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left', flex: 1 }}>
                 {isTruncated ? (
                   <>
                     {truncate(t.quote, maxLength)}
