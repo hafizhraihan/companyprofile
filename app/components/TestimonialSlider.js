@@ -44,7 +44,7 @@ export default function TestimonialSlider({ testimonials }) {
           <div className="testimonial-card-modern">
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, justifyContent: 'center' }}>
               <span style={{ fontFamily: 'Oswald, Arial, sans-serif', fontWeight: 700, fontSize: '2.5rem', color: '#2563eb', lineHeight: 1, position: 'relative', top: '-0.5em' }}>,,</span>
-              <blockquote style={{ fontSize: '1.15rem', fontWeight: 400, color: '#222', borderLeft: '3px solid #2563eb', paddingLeft: 12, margin: 0, background: 'none', borderRadius: 0, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'left', flex: 1 }}>
+              <blockquote className="testimonial-quote-block">
                 {isTruncated ? (
                   <>
                     {truncate(t.quote, maxLength)}
@@ -262,10 +262,17 @@ export default function TestimonialSlider({ testimonials }) {
            min-height: 60px;
            max-height: none;
          }
+         .testimonial-card-modern blockquote {
+           font-size: 0.75rem;
+         }
          .slider-arrow {
-           width: 18px;
-           height: 18px;
-           font-size: 0.9rem;
+           width: 14px;
+           height: 14px;
+           aspect-ratio: 1 / 1;
+           font-size: 0.8rem;
+           display: flex;
+           align-items: center;
+           justify-content: center;
          }
          .slider-arrow.left {
            left: -10px;
@@ -280,6 +287,7 @@ export default function TestimonialSlider({ testimonials }) {
          .slider-dot {
            width: 5px;
            height: 5px;
+           aspect-ratio: 1 / 1;
          }
         }
       `}</style>
