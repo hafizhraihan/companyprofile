@@ -129,16 +129,17 @@ export default function TestimonialSlider({ testimonials }) {
         }
         .testimonial-card-modern {
           background: #fff;
-          border-radius: 12px;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-          padding: 0.7rem 0.7rem;
+          border-radius: 10px;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+          padding: 1.1rem 1.2rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          min-width: 140px;
-          min-height: 80px;
-          max-height: 120px;
-          width: 200px;
+          min-width: 220px;
+          min-height: 120px;
+          max-width: 320px;
+          max-height: 180px;
+          width: 320px;
           overflow: hidden;
           justify-content: center;
         }
